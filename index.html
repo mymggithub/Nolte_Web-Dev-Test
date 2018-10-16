@@ -25,6 +25,7 @@
           background-repeat: no-repeat;
           padding: 12px 20px 12px 42px;
         }
+        /*searchNear is going to be for to look based on address*/
         #searchNear{
             background-image: url(./assets/img/nearicon.png);
         }
@@ -43,12 +44,16 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-xs-12 col-md-12 search-form">
-                <input type="text" name="search" placeholder="Search venue...">
+                <input type="text" name="search" placeholder="Search venue..." id="venueSearch">
+                <input type="text" name="search" placeholder="Search Near...Can leave blank" id="searchNear">
                 <button class="btn btn-info">Search</button>
+            </div>
+            <div class="col-sm-12 col-xs-12 col-md-12">
             </div>
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 </body>
 </html>
