@@ -1,10 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>netlify</title>
+    <meta charset="UTF-8">
+    <title>foursquare web app test</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style type="text/css">
+        /*touches to make the search bar more dynamic*/
+        .search-form {
+          display:flex;
+          font-size:14px;
+          margin:25px 0px;
+        }
+        .search-form input {
+          border:1px solid #ddd;
+          border-radius:5px 0 0 5px;
+          padding:10px;
+          border-right:none;
+          width:100%;
+          background-image: url(./assets/img/searchicon.png);
+          background-position: 10px 12px;
+          background-repeat: no-repeat;
+          padding: 12px 20px 12px 42px;
+        }
+        #searchNear{
+            background-image: url(./assets/img/nearicon.png);
+        }
+        .btn.btn-default.search-btn {
+          border:1px solid #ddd;
+          border-radius:0 5px 5px 0;
+          box-shadow:none;
+          color:#919693;
+        }
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
 </head>
 <body>
-	<p>netlify test 2</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 col-md-12 search-form">
+                <input type="text" name="search" placeholder="Search venue...">
+                <button class="btn btn-info">Search</button>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </body>
 </html>
