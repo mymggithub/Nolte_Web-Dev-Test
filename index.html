@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>foursquare web app test</title>
+    <title>Document</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
@@ -35,7 +35,10 @@
           box-shadow:none;
           color:#919693;
         }
-
+        /* Styles the columns of the table */
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
@@ -49,11 +52,38 @@
                 <button class="btn btn-info">Search</button>
             </div>
             <div class="col-sm-12 col-xs-12 col-md-12">
+
             </div>
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
 
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+            	console.log("lat: "+position.coords.latitude+", lng: "+position.coords.longitude)
+            }, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    </script>
 </body>
 </html>
