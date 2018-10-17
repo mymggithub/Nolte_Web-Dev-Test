@@ -32,8 +32,6 @@
 										<span ng-show="!reverseSort"><i class="fa fa-sort-numeric-desc"></i></span>
 									</span>
 								</span>
-									
-								
 							</th>
 							<th ng-click="tableSort('Name')">
 								<span class="sort">
@@ -50,7 +48,7 @@
 					<tbody>
 						<tr ng-repeat="result in results | orderBy :orderByField:reverseSort">
 							<th scope="row" data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{$index+1}}</th>
-							<td ng-if="has_distance" data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.location.distance}}</td>
+							<td ng-if="has_distance" data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.location.distance}} meters</td>
 							<td data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.name}}</td>
 							<td data-aos="fade-left" data-aos-anchor-placement="center-bottom" data-aos-duration="30000" class="social">
 								<a target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u={{result.link}}"><i class="fa fa-facebook"></i></a>
