@@ -77,28 +77,29 @@
             }
         }
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-            	console.log("lat: "+position.coords.latitude+", lng: "+position.coords.longitude)
-            }, showError);
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
+
 
         var myapp = angular.module('myapp', []);
         myapp.controller("myCtrl", function($scope, $http) {
         	$scope.searchFor = function() {
+            	if ($scope.venueSearch==undefined || $scope.venueSearch == null) {$scope.venueSearch = "";}
         		$scope.search_val = $scope.venueSearch;
-                $http.get("https://api.foursquare.com/v2/venues/search?client_id=UCOSSBXHSTZ3UIAA4RKO5DPXCVJQEOG1NINJ1LDUNL0LEJ4F&client_secret=Q3CGAJFLKGOELNT3I3YPUAQKEHMI20CN4J2QDZGBHD433QDS&v=20180323&ll=40.7337621,-74.0095604&query="+$scope.venueSearch).then(
-                    function(r) {
-                    	console.log(r.data.response.venues);
-                        $scope.results = r.data.response.venues;
-                    },
-                    function(r) {
-                        // foursquare is not advaced as google in deciphering near, so this is needed for errors
-                        alert("Something went wrong, Please try a diffrent search or try another time.");
-                    }
-                );
+		        if (navigator.geolocation) {
+		            navigator.geolocation.getCurrentPosition(function(position) {
+		                $http.get("https://api.foursquare.com/v2/venues/search?client_id=UCOSSBXHSTZ3UIAA4RKO5DPXCVJQEOG1NINJ1LDUNL0LEJ4F&client_secret=Q3CGAJFLKGOELNT3I3YPUAQKEHMI20CN4J2QDZGBHD433QDS&v=20180323&ll="+position.coords.latitude+","+position.coords.longitude+"&query="+$scope.venueSearch).then(
+		                    function(r) {
+		                    	console.log(r.data.response.venues);
+		                        $scope.results = r.data.response.venues;
+		                    },
+		                    function(r) {
+		                        // foursquare is not advaced as google in deciphering near, so this is needed for errors
+		                        alert("Something went wrong, Please try a diffrent search or try another time.");
+		                    }
+		                );
+		            }, showError);
+		        } else {
+		            alert("Geolocation is not supported by this browser.");
+		        }
         	}
         });
     </script>
