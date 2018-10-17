@@ -77,6 +77,13 @@
             color: black;
             border: dotted 1px black;
         }
+        .sort{
+        	display: flex;
+        }
+
+        .fa-sort-amount-desc, .fa-sort-amount-asc{
+        	font-size: small;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
@@ -86,7 +93,7 @@
         <div class="row">
             <div class="col-sm-12 col-xs-12 col-md-12 search-form">
                 <input type="text" name="search" placeholder="Search venue..." ng-model="venueSearch" id="venueSearch">
-                <input type="text" name="search" placeholder="Search Near...Can leave blank"  ng-model="nearlocation" id="searchNear">
+                <input type="text" name="search" placeholder="Search Near...Can leave blank" ng-model="nearlocation" id="searchNear">
                 <button class="btn btn-info" ng-click="findLocation()">Search</button>
             </div>
             <div class="col-sm-12 col-xs-12 col-md-12">
@@ -95,17 +102,25 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th ng-if="has_distance" ng-click="tableSort('Distance')">Distance 
-                                <span ng-if="orderByField == 'location.distance'">
-                                    <span ng-show="reverseSort">^</span>
-                                    <span ng-show="!reverseSort">v</span>
-                                </span>
+                            <th ng-if="has_distance" ng-click="tableSort('Distance')" >
+								<span class="sort">
+									Distance
+	                                <span ng-if="orderByField == 'location.distance'">
+	                                    <span ng-show="reverseSort"><i class="fa fa-sort-amount-asc"></i></span>
+	                                    <span ng-show="!reverseSort"><i class="fa fa-sort-amount-desc"></i></span>
+	                                </span>
+								</span>
+									
+								
                             </th>
-                            <th ng-click="tableSort('Name')">Place 
-                                <span ng-if="orderByField == 'name'">
-                                    <span ng-show="reverseSort">^</span>
-                                    <span ng-show="!reverseSort">v</span>
-                                </span>
+                            <th ng-click="tableSort('Name')">
+                            	<span class="sort">
+	                        		Place 
+	                                <span ng-if="orderByField == 'name'">
+	                                    <span ng-show="reverseSort"><i class="fa fa-sort-amount-asc"></i></span>
+	                                    <span ng-show="!reverseSort"><i class="fa fa-sort-amount-desc"></i></span>
+	                                </span>
+                            	</span>
                             </th>
                             <th>Share</th>
                         </tr>
@@ -204,20 +219,6 @@
                     alert("Geolocation is not supported by this browser.");
                 }
             }
-        });
-        // I was using these to genorate a link, though I am not using them, but still useful filters
-        myapp.filter('spaceless', function () {
-          return function (input) {
-              return input.replace(/ /g, '-');
-          };
-        });
-        myapp.filter('strReplace', function () {
-          return function (input, from, to) {
-            input = input || '';
-            from = from || '';
-            to = to || '';
-            return input.replace(new RegExp(from, 'g'), to);
-          };
         });
         AOS.init({ disable: 'mobile' });
     </script>
