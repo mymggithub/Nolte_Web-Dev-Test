@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>foursquare web app test</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
@@ -95,15 +95,25 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Distance </th>
-                            <th>Place </th>
+                            <th ng-if="has_distance" ng-click="tableSort('Distance')">Distance 
+                                <span ng-if="orderByField == 'location.distance'">
+                                    <span ng-show="reverseSort">^</span>
+                                    <span ng-show="!reverseSort">v</span>
+                                </span>
+                            </th>
+                            <th ng-click="tableSort('Name')">Place 
+                                <span ng-if="orderByField == 'name'">
+                                    <span ng-show="reverseSort">^</span>
+                                    <span ng-show="!reverseSort">v</span>
+                                </span>
+                            </th>
                             <th>Share</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="result in results | orderBy :location.distance">
+                        <tr ng-repeat="result in results | orderBy :orderByField:reverseSort">
                             <th scope="row" data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{$index+1}}</th>
-                            <td data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.location.distance}}</td>
+                            <td ng-if="has_distance" data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.location.distance}}</td>
                             <td data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.name}}</td>
                             <td data-aos="fade-left" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">
                                 <a target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u={{result.link}}"><i class="fa fa-facebook"></i></a>
@@ -142,11 +152,24 @@
 
         var myapp = angular.module('myapp', []);
         myapp.controller("myCtrl", function($scope, $http) {
-        	$scope.searchFor = function() {
+            $scope.tableSort = function(col) {
+                $scope.reverseSort = !$scope.reverseSort
+                if (col == "Distance") {
+                    $scope.orderByField='location.distance'; 
+                }else if (col == "Name"){
+                    $scope.orderByField = 'name';
+                }
+                setTimeout(function() {AOS.init({ disable: 'mobile' });}, 1000);
+            };
 
+
+        	$scope.searchFor = function() {
+                $scope.orderByField = 'location.distance';
+                $scope.reverseSort = false;
+                $scope.search_val = $scope.venueSearch;
+                $scope.has_distance = false;
                 if ($scope.nearlocation==undefined || $scope.nearlocation == null) {$scope.nearlocation = "";}
             	if ($scope.venueSearch==undefined || $scope.venueSearch == null) {$scope.venueSearch = "";}
-        		$scope.search_val = $scope.venueSearch;
 		        if (navigator.geolocation) {
 		            navigator.geolocation.getCurrentPosition(function(position) {
 		                var appendLocation = "";
