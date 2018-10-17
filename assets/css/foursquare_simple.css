@@ -1,0 +1,83 @@
+/*touches to make the search bar more dynamic*/
+.search-form {
+	display:flex;
+	font-size:14px;
+	margin:25px 0px;
+}
+.search-form input {
+	border:1px solid #ddd;
+	border-radius:5px 0 0 5px;
+	padding:10px;
+	border-right:none;
+	width:100%;
+	background-image: url(./assets/img/searchicon.png);
+	background-position: 10px 12px;
+	background-repeat: no-repeat;
+	padding: 12px 20px 12px 42px;
+}
+/*searchNear is going to be for to look based on address*/
+#searchNear{
+	background-image: url(./assets/img/nearicon.png);
+}
+.btn.btn-default.search-btn {
+	border:1px solid #ddd;
+	border-radius:0 5px 5px 0;
+	box-shadow:none;
+	color:#919693;
+}
+/* Styles the columns of the table */
+tr:nth-child(even) {
+	background-color: #f2f2f2
+}
+/* Style all font awesome icons */
+.social .fa {
+	padding: 5px;
+	font-size: 30px;
+	width: 50px;
+	text-align: center;
+	text-decoration: none;
+}
+
+/* Add a hover effect if you want */
+.social .fa:hover {
+	opacity: 0.7;
+	transform:rotate(360deg);
+	border-radius:25%;
+}
+
+.social i {
+  transition:all 0.7s;
+  width:50px;
+}
+/* Set a specific color for each brand */
+
+/* Facebook */
+.social .fa-facebook {
+	background: #3B5998;
+	color: white;
+}
+
+/* Twitter */
+.social .fa-twitter {
+	background: #55ACEE;
+	color: white;
+}
+
+/* Google Plus */
+.social .fa-google-plus {
+	background: #d43c3c;
+	color: white;
+}
+
+.social .fa-link{
+	color: black;
+	border: dotted 1px black;
+}
+.sort{
+	display: flex;
+}
+
+th i{
+	font-size: small;
+	margin: 0px 2px;
+}
