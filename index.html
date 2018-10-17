@@ -82,11 +82,19 @@
         var myapp = angular.module('myapp', []);
         myapp.controller("myCtrl", function($scope, $http) {
         	$scope.searchFor = function() {
+
+                if ($scope.nearlocation==undefined || $scope.nearlocation == null) {$scope.nearlocation = "";}
             	if ($scope.venueSearch==undefined || $scope.venueSearch == null) {$scope.venueSearch = "";}
         		$scope.search_val = $scope.venueSearch;
 		        if (navigator.geolocation) {
 		            navigator.geolocation.getCurrentPosition(function(position) {
-		                $http.get("https://api.foursquare.com/v2/venues/search?client_id=UCOSSBXHSTZ3UIAA4RKO5DPXCVJQEOG1NINJ1LDUNL0LEJ4F&client_secret=Q3CGAJFLKGOELNT3I3YPUAQKEHMI20CN4J2QDZGBHD433QDS&v=20180323&ll="+position.coords.latitude+","+position.coords.longitude+"&query="+$scope.venueSearch).then(
+		                var appendLocation = "";
+		                if ($scope.nearlocation == "") {
+		                    appendLocation = "&ll="+position.coords.latitude+","+position.coords.longitude;
+		                }else{
+		                    appendLocation = "&near="+$scope.nearlocation.replace(/ /g, '+');
+		                }
+		                $http.get("https://api.foursquare.com/v2/venues/search?client_id=UCOSSBXHSTZ3UIAA4RKO5DPXCVJQEOG1NINJ1LDUNL0LEJ4F&client_secret=Q3CGAJFLKGOELNT3I3YPUAQKEHMI20CN4J2QDZGBHD433QDS&v=20180323"+appendLocation+"&query="+$scope.venueSearch).then(
 		                    function(r) {
 		                    	console.log(r.data.response.venues);
 		                        $scope.results = r.data.response.venues;
