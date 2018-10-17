@@ -87,7 +87,7 @@
             <div class="col-sm-12 col-xs-12 col-md-12 search-form">
                 <input type="text" name="search" placeholder="Search venue..." ng-model="venueSearch" id="venueSearch">
                 <input type="text" name="search" placeholder="Search Near...Can leave blank"  ng-model="nearlocation" id="searchNear">
-                <button class="btn btn-info" ng-click="searchFor()">Search</button>
+                <button class="btn btn-info" ng-click="findLocation()">Search</button>
             </div>
             <div class="col-sm-12 col-xs-12 col-md-12">
                 <caption>Search for <i>( {{search_val}} ) </i> <b>{{results.length}}</b> Search results</caption>
@@ -147,9 +147,6 @@
                     break;
             }
         }
-
-
-
         var myapp = angular.module('myapp', []);
         myapp.controller("myCtrl", function($scope, $http) {
             $scope.tableSort = function(col) {
@@ -162,44 +159,51 @@
                 setTimeout(function() {AOS.init({ disable: 'mobile' });}, 1000);
             };
 
+            // this is to get search results, it is being called at the time after html5 geo api
+            $scope.getSearch = function(lat, lng) {
+                var appendLocation = "";
+                if ($scope.nearlocation == "") {
+                    appendLocation = "&ll="+lat+","+lng;
+                }else{
+                    appendLocation = "&near="+$scope.nearlocation.replace(/ /g, '+');
+                }
+                $http.get("https://api.foursquare.com/v2/venues/search?client_id=UCOSSBXHSTZ3UIAA4RKO5DPXCVJQEOG1NINJ1LDUNL0LEJ4F&client_secret=Q3CGAJFLKGOELNT3I3YPUAQKEHMI20CN4J2QDZGBHD433QDS&v=20180323"+appendLocation+"&query="+$scope.venueSearch).then(
+                    function(r) {
+                        for (var i = 0; i < r.data.response.venues.length; i++) {
+                            r.data.response.venues[i].link = "https://foursquare.com/v/"+r.data.response.venues[i].name.replace(/ /g, '-')+"/"+r.data.response.venues[i].id;
+                            if(r.data.response.venues[i].location.distance!=undefined){
+                                $scope.has_distance = true;
+                            }
+                        }
+                        $scope.results = r.data.response.venues;
+                        // the timeout is for to reset the AOS animation, because it is not detecting the new length of the page
+                        setTimeout(function() {AOS.init({ disable: 'mobile' });}, 1000);
+                    },
+                    function(r) {
+                        // foursquare is not advaced as google in deciphering near, so this is needed for errors
+                        alert("Something went wrong, Please try a diffrent search or try another time.");
+                    }
+                );
+            }
 
-        	$scope.searchFor = function() {
+            // findLocation is for to use html5 geo api
+            // findLocation is called everytime the sreach button is pressed
+            $scope.findLocation = function() {
                 $scope.orderByField = 'location.distance';
                 $scope.reverseSort = false;
                 $scope.search_val = $scope.venueSearch;
                 $scope.has_distance = false;
+
                 if ($scope.nearlocation==undefined || $scope.nearlocation == null) {$scope.nearlocation = "";}
-            	if ($scope.venueSearch==undefined || $scope.venueSearch == null) {$scope.venueSearch = "";}
-		        if (navigator.geolocation) {
-		            navigator.geolocation.getCurrentPosition(function(position) {
-		                var appendLocation = "";
-		                if ($scope.nearlocation == "") {
-		                    appendLocation = "&ll="+position.coords.latitude+","+position.coords.longitude;
-		                }else{
-		                    appendLocation = "&near="+$scope.nearlocation.replace(/ /g, '+');
-		                }
-		                $http.get("https://api.foursquare.com/v2/venues/search?client_id=UCOSSBXHSTZ3UIAA4RKO5DPXCVJQEOG1NINJ1LDUNL0LEJ4F&client_secret=Q3CGAJFLKGOELNT3I3YPUAQKEHMI20CN4J2QDZGBHD433QDS&v=20180323"+appendLocation+"&query="+$scope.venueSearch).then(
-		                    function(r) {
-		                        for (var i = 0; i < r.data.response.venues.length; i++) {
-		                            r.data.response.venues[i].link = "https://foursquare.com/v/"+r.data.response.venues[i].name.replace(/ /g, '-')+"/"+r.data.response.venues[i].id;
-		                            if(r.data.response.venues[i].location.distance!=undefined){
-		                                $scope.has_distance = true;
-		                            }
-		                        }
-		                        $scope.results = r.data.response.venues;
-		                        // the timeout is for to reset the AOS animation, because it is not detecting the new length of the page
-		                        setTimeout(function() {AOS.init({ disable: 'mobile' });}, 1000);
-		                    },
-		                    function(r) {
-		                        // foursquare is not advaced as google in deciphering near, so this is needed for errors
-		                        alert("Something went wrong, Please try a diffrent search or try another time.");
-		                    }
-		                );
-		            }, showError);
-		        } else {
-		            alert("Geolocation is not supported by this browser.");
-		        }
-        	}
+                if ($scope.venueSearch==undefined || $scope.venueSearch == null) {$scope.venueSearch = "";}
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        $scope.getSearch(position.coords.latitude, position.coords.longitude);
+                    }, showError);
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
         });
         // I was using these to genorate a link, though I am not using them, but still useful filters
         myapp.filter('spaceless', function () {
