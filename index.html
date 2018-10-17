@@ -39,6 +39,44 @@
         tr:nth-child(even) {
             background-color: #f2f2f2
         }
+        /* Style all font awesome icons */
+        .fa {
+            padding: 5px;
+            font-size: 30px;
+            width: 50px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        /* Add a hover effect if you want */
+        .fa:hover {
+            opacity: 0.7;
+        }
+
+        /* Set a specific color for each brand */
+
+        /* Facebook */
+        .fa-facebook {
+            background: #3B5998;
+            color: white;
+        }
+
+        /* Twitter */
+        .fa-twitter {
+            background: #55ACEE;
+            color: white;
+        }
+
+        /* Google Plus */
+        .fa-google-plus {
+            background: #d43c3c;
+            color: white;
+        }
+
+        .fa-link{
+            color: black;
+            border: dotted 1px black;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
@@ -52,7 +90,31 @@
                 <button class="btn btn-info" ng-click="searchFor()">Search</button>
             </div>
             <div class="col-sm-12 col-xs-12 col-md-12">
+                <caption>Search for <i>( {{search_val}} ) </i> <b>{{results.length}}</b> Search results</caption>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Distance </th>
+                            <th>Place </th>
+                            <th>Share</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="result in results | orderBy :location.distance">
+                            <th scope="row" data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{$index+1}}</th>
+                            <td data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.location.distance}}</td>
+                            <td data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.name}}</td>
+                            <td data-aos="fade-left" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">
+                                <a target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u=https://foursquare.com/v/{{result.name|spaceless}}/{{result.id}}"><i class="fa fa-facebook"></i></a>
+                                <a target="_blank" ng-href="https://twitter.com/home?status=https://foursquare.com/v/{{result.name|spaceless}}/{{result.id}}"><i class="fa fa-twitter"></i></a>
+                                <a target="_blank" ng-href="https://plus.google.com/share?url=https://foursquare.com/v/{{result.name|spaceless}}/{{result.id}}"><i class="fa fa-google-plus"></i></a>
+                                <a target="_blank" ng-href="https://foursquare.com/v/{{result.name|spaceless}}/{{result.id}}"><i class="fa fa-link"></i></a>
 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -96,7 +158,6 @@
 		                }
 		                $http.get("https://api.foursquare.com/v2/venues/search?client_id=UCOSSBXHSTZ3UIAA4RKO5DPXCVJQEOG1NINJ1LDUNL0LEJ4F&client_secret=Q3CGAJFLKGOELNT3I3YPUAQKEHMI20CN4J2QDZGBHD433QDS&v=20180323"+appendLocation+"&query="+$scope.venueSearch).then(
 		                    function(r) {
-		                    	console.log(r.data.response.venues);
 		                        $scope.results = r.data.response.venues;
 		                    },
 		                    function(r) {
@@ -109,6 +170,19 @@
 		            alert("Geolocation is not supported by this browser.");
 		        }
         	}
+        });
+        myapp.filter('spaceless', function () {
+          return function (input) {
+              return input.replace(/ /g, '-');
+          };
+        });
+        myapp.filter('strReplace', function () {
+          return function (input, from, to) {
+            input = input || '';
+            from = from || '';
+            to = to || '';
+            return input.replace(new RegExp(from, 'g'), to);
+          };
         });
     </script>
 </body>
