@@ -15,7 +15,38 @@ function showError(error) {
 	}
 }
 var myapp = angular.module('myapp', []);
+myapp.directive("showResults", function() {
+	return {
+		template : "<caption>Search for <i>( {{search_val}} ) </i> <b>{{results.length}}</b> Search results</caption>"
+	};
+});
 myapp.controller("myCtrl", function($scope, $http) {
+	$scope.msg = function(msg) {
+		$scope.alert_msg = msg;
+		$("#snackbar").addClass("show");
+		setTimeout(function(){ $("#snackbar").removeClass("show"); }, 3000);
+	}
+	$scope.copyLnk = function(lnk,e) {
+		targetId = "_hiddenCopyText_";
+		target = document.getElementById(targetId);
+		if (!target) {
+			var target = document.createElement("textarea");
+			target.style.position = "absolute";
+			target.style.left = "-9999px";
+			target.style.top = e.clientY;
+			target.id = targetId;
+			document.body.appendChild(target);
+		}
+		target.textContent = lnk;
+		target.select();
+		try {
+			succeed = document.execCommand("copy");
+			target.textContent = "";
+			$scope.msg("Copied link");
+		} catch(e) {
+			$scope.msg("Unable to copy link");
+		}
+	}
 	$scope.tableSort = function(col) {
 		$scope.reverseSort = !$scope.reverseSort
 		if (col == "Distance") {

@@ -49,12 +49,14 @@
 						<tr ng-repeat="result in results | orderBy :orderByField:reverseSort">
 							<th scope="row" data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{$index+1}}</th>
 							<td ng-if="has_distance" data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.location.distance}} meters</td>
-							<td data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.name}}</td>
+							<td data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000" class="place"><a href="{{result.link}}">{{result.name}}</a></td>
 							<td data-aos="fade-left" data-aos-anchor-placement="center-bottom" data-aos-duration="30000" class="social">
 								<a target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u={{result.link}}"><i class="fa fa-facebook"></i></a>
 								<a target="_blank" ng-href="https://twitter.com/home?status={{result.link}}"><i class="fa fa-twitter"></i></a>
 								<a target="_blank" ng-href="https://plus.google.com/share?url={{result.link}}"><i class="fa fa-google-plus"></i></a>
-								<a target="_blank" ng-href="{{result.link}}"><i class="fa fa-link"></i></a>
+								<!-- <a target="_blank" ng-click="copyLnk(result.link)"><i class="fa fa-link"></i></a> -->
+								<span class="side-tooltip" ng-click="copyLnk(result.link,$event)"><i class="fa fa-link"></i></span>
+
 							</td>
 						</tr>
 					</tbody>
@@ -62,8 +64,10 @@
 			</div>
 		</div>
 	</div>
+	<div id="snackbar">{{alert_msg}}</div>
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/foursquare_simple.js"></script>
+
 </body>
 </html>
