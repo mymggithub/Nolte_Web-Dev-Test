@@ -10,14 +10,14 @@
 	padding:10px;
 	border-right:none;
 	width:100%;
-	background-image: url(./assets/img/searchicon.png);
+	background-image: url(../img/searchicon.png);
 	background-position: 10px 12px;
 	background-repeat: no-repeat;
 	padding: 12px 20px 12px 42px;
 }
 /*searchNear is going to be for to look based on address*/
 #searchNear{
-	background-image: url(./assets/img/nearicon.png);
+	background-image: url(../img/nearicon.png);
 }
 .btn.btn-default.search-btn {
 	border:1px solid #ddd;
@@ -25,10 +25,7 @@
 	box-shadow:none;
 	color:#919693;
 }
-/* Styles the columns of the table */
-tr:nth-child(even) {
-	background-color: #f2f2f2
-}
+
 /* Style all font awesome icons */
 .social .fa {
 	padding: 5px;
@@ -73,6 +70,12 @@ tr:nth-child(even) {
 	color: black;
 	border: dotted 1px black;
 }
+
+/* Styles the columns of the table */
+tr:nth-child(even) {
+	background-color: #f2f2f2
+}
+
 .sort{
 	display: flex;
 }
