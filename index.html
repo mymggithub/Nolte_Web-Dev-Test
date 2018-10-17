@@ -106,11 +106,10 @@
                             <td data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.location.distance}}</td>
                             <td data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.name}}</td>
                             <td data-aos="fade-left" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">
-                                <a target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u=https://foursquare.com/v/{{result.name|spaceless}}/{{result.id}}"><i class="fa fa-facebook"></i></a>
-                                <a target="_blank" ng-href="https://twitter.com/home?status=https://foursquare.com/v/{{result.name|spaceless}}/{{result.id}}"><i class="fa fa-twitter"></i></a>
-                                <a target="_blank" ng-href="https://plus.google.com/share?url=https://foursquare.com/v/{{result.name|spaceless}}/{{result.id}}"><i class="fa fa-google-plus"></i></a>
-                                <a target="_blank" ng-href="https://foursquare.com/v/{{result.name|spaceless}}/{{result.id}}"><i class="fa fa-link"></i></a>
-
+                                <a target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u={{result.link}}"><i class="fa fa-facebook"></i></a>
+                                <a target="_blank" ng-href="https://twitter.com/home?status={{result.link}}"><i class="fa fa-twitter"></i></a>
+                                <a target="_blank" ng-href="https://plus.google.com/share?url={{result.link}}"><i class="fa fa-google-plus"></i></a>
+                                <a target="_blank" ng-href="{{result.link}}"><i class="fa fa-link"></i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -158,7 +157,15 @@
 		                }
 		                $http.get("https://api.foursquare.com/v2/venues/search?client_id=UCOSSBXHSTZ3UIAA4RKO5DPXCVJQEOG1NINJ1LDUNL0LEJ4F&client_secret=Q3CGAJFLKGOELNT3I3YPUAQKEHMI20CN4J2QDZGBHD433QDS&v=20180323"+appendLocation+"&query="+$scope.venueSearch).then(
 		                    function(r) {
+		                        for (var i = 0; i < r.data.response.venues.length; i++) {
+		                            r.data.response.venues[i].link = "https://foursquare.com/v/"+r.data.response.venues[i].name.replace(/ /g, '-')+"/"+r.data.response.venues[i].id;
+		                            if(r.data.response.venues[i].location.distance!=undefined){
+		                                $scope.has_distance = true;
+		                            }
+		                        }
 		                        $scope.results = r.data.response.venues;
+		                        // the timeout is for to reset the AOS animation, because it is not detecting the new length of the page
+		                        setTimeout(function() {AOS.init({ disable: 'mobile' });}, 1000);
 		                    },
 		                    function(r) {
 		                        // foursquare is not advaced as google in deciphering near, so this is needed for errors
@@ -171,6 +178,7 @@
 		        }
         	}
         });
+        // I was using these to genorate a link, though I am not using them, but still useful filters
         myapp.filter('spaceless', function () {
           return function (input) {
               return input.replace(/ /g, '-');
@@ -184,6 +192,7 @@
             return input.replace(new RegExp(from, 'g'), to);
           };
         });
+        AOS.init({ disable: 'mobile' });
     </script>
 </body>
 </html>
