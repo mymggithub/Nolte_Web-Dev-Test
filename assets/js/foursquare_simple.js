@@ -16,7 +16,18 @@ myapp.directive("alertBox", function() {
 </div>`
 	};
 });
-
+myapp.directive('myEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.myEnter);
+                });
+                event.preventDefault();
+            }
+        });
+    };
+});
 myapp.controller("myCtrl", function($scope, $http) {
 	$scope.alert_msg = "There has been an error.";
 	$scope.no_result = true;

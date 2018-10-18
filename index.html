@@ -14,11 +14,13 @@
 	<div class="container-fluid">
 		<alert-box></alert-box>
 		<div class="row">
-			<div class="col-sm-12 col-xs-12 col-md-12 search-form">
-				<input type="text" name="search" placeholder="Search venue..." ng-model="venueSearch" id="venueSearch">
-				<input type="text" name="search" placeholder="Search Near...Can leave blank" ng-model="nearlocation" id="searchNear">
+			<div class="col-xs-12 col-sm-12 col-md-12 search-form">
+				<input type="text" name="search" placeholder="Search venue..." ng-model="venueSearch" id="venueSearch" my-enter="findLocation()">
+				<input type="text" name="search" placeholder="Search Near...Can leave blank" ng-model="nearlocation" id="searchNear" my-enter="findLocation()">
 				<button class="btn btn-info" ng-click="findLocation()">Search</button>
 			</div>
+		</div>
+		<div class="row">
 			<div class="col-sm-12 col-xs-12 col-md-12">
 				<span ng-show="searched">
 					<span ng-hide="no_result">
