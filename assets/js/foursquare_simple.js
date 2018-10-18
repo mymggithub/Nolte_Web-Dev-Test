@@ -109,7 +109,7 @@ myapp.controller("myCtrl", function($scope, $http) {
 		if ($scope.nearlocation==undefined || $scope.nearlocation == null) {$scope.nearlocation = "";}
 		if ($scope.venueSearch==undefined || $scope.venueSearch == null) {$scope.venueSearch = "";}
 		if (navigator.geolocation) {
-			a= navigator.geolocation.getCurrentPosition(function(position) {
+			navigator.geolocation.getCurrentPosition(function(position) {
 				$scope.getSearch(position.coords.latitude, position.coords.longitude);
 			}, 
 			// check for errors for the geo location
@@ -130,7 +130,6 @@ myapp.controller("myCtrl", function($scope, $http) {
 				}
 				$scope.getSearch();
 			});
-			console.log(a)
 		} else {
 			$scope.alertBox("Geolocation is not supported by this browser.");
 		}
