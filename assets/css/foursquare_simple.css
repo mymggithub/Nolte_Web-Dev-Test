@@ -3,16 +3,10 @@
 ===========================================*/
 
 /*touches to make the search bar more dynamic*/
-.search-form {
-	display:flex;
-	font-size:14px;
-	margin:25px 0px;
-}
 .search-form input {
 	border:1px solid #ddd;
-	border-radius:5px 0 0 5px;
 	padding:10px;
-	border-right:none;
+	border-radius:5px;
 	width:100%;
 	background-image: url(../img/searchicon.png);
 	background-position: 10px 12px;
@@ -23,11 +17,33 @@
 #searchNear{
 	background-image: url(../img/nearicon.png);
 }
-.btn.btn-default.search-btn {
-	border:1px solid #ddd;
-	border-radius:0 5px 5px 0;
-	box-shadow:none;
-	color:#919693;
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+	.btn.search-btn {
+		width: 100%;
+	}
+}
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 601px) {
+	.search-form {
+		display:flex;
+		font-size:14px;
+		margin:25px 0px;
+	}
+	.search-form input {
+		border-radius:5px 0 0 5px;
+		border-right:none;
+	}
+	.search-form input:nth-child(2) {
+		border-radius:0;
+		border-left: 1px dotted grey;
+	}
+	.btn.search-btn {
+		border:1px solid #ddd;
+		border-radius:0 5px 5px 0;
+		box-shadow:none;
+	}
 }
 
 /*=====  End of Dynaminc Search Bar  ======*/
@@ -53,8 +69,8 @@
 }
 
 .social i {
-  transition:all 0.7s;
-  width:50px;
+	transition:all 0.7s;
+	width:50px;
 }
 /* Set a specific color for each brand */
 
@@ -110,7 +126,7 @@ th i{
 }
 
 .place a{
-    color: #212529;
+		color: #212529;
 }
 
 /*=====  End of Results Table  ======*/
@@ -123,47 +139,47 @@ th i{
 /* The snackbar - position it at the bottom and in the middle of the screen */
 
 #snackbar {
-    visibility: hidden; 
-    min-width: 250px; 
-    margin-left: -125px; /* Divide value of min-width by 2 */
-    background-color: #333; /* Black background color */
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 9999; 
-    left: 50%; /* Center the snackbar */
-    bottom: 30px; /* 30px from the bottom */
+		visibility: hidden; 
+		min-width: 250px; 
+		margin-left: -125px; /* Divide value of min-width by 2 */
+		background-color: #333; /* Black background color */
+		color: #fff;
+		text-align: center;
+		border-radius: 2px;
+		padding: 16px;
+		position: fixed;
+		z-index: 9999; 
+		left: 50%; /* Center the snackbar */
+		bottom: 30px; /* 30px from the bottom */
 }
 
 #snackbar.show {
-    visibility: visible; 
+		visibility: visible; 
 /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
 However, delay the fade out process for 2.5 seconds */
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+		-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+		animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
 /* Animations to fade the snackbar in and out */
 @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 30px; opacity: 1;}
+		from {bottom: 0; opacity: 0;} 
+		to {bottom: 30px; opacity: 1;}
 }
 
 @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+		from {bottom: 0; opacity: 0;}
+		to {bottom: 30px; opacity: 1;}
 }
 
 @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
+		from {bottom: 30px; opacity: 1;} 
+		to {bottom: 0; opacity: 0;}
 }
 
 @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+		from {bottom: 30px; opacity: 1;}
+		to {bottom: 0; opacity: 0;}
 }
 
 /*=====  End of Snackbar  ======*/
@@ -176,24 +192,24 @@ However, delay the fade out process for 2.5 seconds */
 .alert {
 	display:none;
 	margin: 5px;
-    padding: 20px;
-    background-color: #f44336;
-    color: white;
+		padding: 20px;
+		background-color: #f44336;
+		color: white;
 }
 
 .closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
+		margin-left: 15px;
+		color: white;
+		font-weight: bold;
+		float: right;
+		font-size: 22px;
+		line-height: 20px;
+		cursor: pointer;
+		transition: 0.3s;
 }
 
 .closebtn:hover {
-    color: black;
+		color: black;
 }
 
 /*=====  End of Alert Box  ======*/
@@ -206,12 +222,12 @@ However, delay the fade out process for 2.5 seconds */
 	color: black;
 }
 .card.clean-card.text-center {
-    margin-bottom: 40px;
-    min-height: 225px;
+		margin-bottom: 40px;
+		min-height: 225px;
 }
 
 h4.card-title a {
-    color: black;
+		color: black;
 }
 /*=====  End of Results Boxes Fixes  ======*/
 
@@ -221,46 +237,46 @@ h4.card-title a {
 
 /*creates a colorful circle*/
 #CSSloader {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 10;
-  margin: -75px 0 0 -75px;
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  border-right: 16px solid green;
-  border-bottom: 16px solid red;
-  border-left: 16px solid pink;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 10;
+	margin: -75px 0 0 -75px;
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px double #3498db2e;
+	border-right: 16px double #3498db85;
+	border-bottom: 16px double #3498dbbf;
+	border-left: 16px double #3498dbe3;
+	width: 120px;
+	height: 120px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
 }
 
 /*rotates the circle*/
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
 }
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
 }
 
 /*adds a background during loading*/
 #CSSloaderOverlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.1);
-    z-index: 9990;
-    cursor: pointer;
+		position: fixed;
+		display: none;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0,0,0,0.1);
+		z-index: 9990;
+		cursor: pointer;
 }
 
 /*=====  End of CSS Loader  ======*/

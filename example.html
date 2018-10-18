@@ -21,16 +21,17 @@
 		<div class="container d-flex justify-content-center align-items-center parallax-content" style="height:100vh;">
 			<div class="col-12 col-md-10 col-lg-8 d-flex justify-content-center flex-column">
 				<h1>Welcome</h1>
-				<p>What are you looking for?</p>
+				<p id="autotype" data-msg="What are you looking for?"></p>
 				<div class="container search-bar">
 					<div class="search-form">
 						<input type="text" name="search" placeholder="Search venue..." ng-model="venueSearch" id="venueSearch" my-enter="findLocation()">
 						<input type="text" name="search" placeholder="Search Near...Can leave blank" ng-model="nearlocation" id="searchNear" my-enter="findLocation()">
-						<button class="btn btn-info" ng-click="findLocation()">Search</button>
+						<button class="btn btn-info search-btn" ng-click="findLocation()">Search</button>
 					</div>
 				</div>
 			</div>
-		</div><video autoplay="" muted="" loop="" class="parallax-background"><source src="assets/img/City.mp4" type="video/mp4" wp-acf="[{'type':'url','name':'video','label':'Video','wrapper':{'width':25}},{'type':'text','name':'video_css','label':'Video CSS (eg. filters)','wrapper':{'width':25}}]" wp-attr="[{'target':'src','replace':'%1'},{'target':'parent_style','replace':'%2'}]"></video>
+		</div>
+		<video autoplay="" muted="" loop="" class="parallax-background"><source src="assets/img/City.mp4" type="video/mp4" wp-acf="[{'type':'url','name':'video','label':'Video','wrapper':{'width':25}},{'type':'text','name':'video_css','label':'Video CSS (eg. filters)','wrapper':{'width':25}}]" wp-attr="[{'target':'src','replace':'%1'},{'target':'parent_style','replace':'%2'}]"></video>
 		<div class="parallax-placeholder" style="background-image:url(&quot;assets/img/placeholder.png&quot;);"></div>
 	<main class="page" ng-hide="no_result">
 		<section class="clean-block">
@@ -51,5 +52,19 @@
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/Video-Parallax-Background-v2.js"></script>
 	<script src="assets/js/foursquare_simple.js"></script>
+	<script>
+		var i = 0;
+		var txt = "";
+		var speed = 70;
+		txt = document.getElementById("autotype").dataset.msg;
+		typeWriter();
+		function typeWriter() {
+			if (i < txt.length) {
+				document.getElementById("autotype").innerHTML = txt.substring(0, i+1);
+				i++;
+				setTimeout(typeWriter, speed);
+			}
+		}
+	</script>
 </body>
 </html>

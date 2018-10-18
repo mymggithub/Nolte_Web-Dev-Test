@@ -231,7 +231,8 @@ myapp.controller("myCtrl", function($scope, $http) {
 				$scope.msg(r.data.response.venues.length+" results found");
 				// the timeout is for to reset the AOS animation, because it is not detecting the new length of the page
 				setTimeout(function() {
-					AOS.init({ disable: 'mobile' });
+					AOS.init();
+					// scrolls down to the results
 					$([document.documentElement, document.body]).animate({
 						scrollTop: $(".results").offset().top
 					}, 2000);
