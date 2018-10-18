@@ -1,0 +1,7 @@
+.pg-block{
+	background: hsla(0,0%,100%,.7);
+	border-radius: 25px;
+}
+.text-info{
+	text-shadow: 2px 2px grey;
+}

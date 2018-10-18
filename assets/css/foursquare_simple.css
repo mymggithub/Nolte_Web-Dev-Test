@@ -198,3 +198,69 @@ However, delay the fade out process for 2.5 seconds */
 
 /*=====  End of Alert Box  ======*/
 
+/*===========================================
+=            Results Boxes Fixes            =
+===========================================*/
+
+.fa.fa-map{
+	color: black;
+}
+.card.clean-card.text-center {
+    margin-bottom: 40px;
+    min-height: 225px;
+}
+
+h4.card-title a {
+    color: black;
+}
+/*=====  End of Results Boxes Fixes  ======*/
+
+/*==================================
+=            CSS Loader            =
+==================================*/
+
+/*creates a colorful circle*/
+#CSSloader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 10;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  border-right: 16px solid green;
+  border-bottom: 16px solid red;
+  border-left: 16px solid pink;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+/*rotates the circle*/
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/*adds a background during loading*/
+#CSSloaderOverlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.1);
+    z-index: 9990;
+    cursor: pointer;
+}
+
+/*=====  End of CSS Loader  ======*/

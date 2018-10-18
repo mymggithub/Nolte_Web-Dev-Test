@@ -22,59 +22,17 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12 col-xs-12 col-md-12">
-				<span ng-show="searched">
-					<span ng-hide="no_result">
-						<caption>Search for <i>( {{search_val}} ) </i> <b>{{results.length}}</b> Search results</caption>
-					</span>
-					<div ng-show="no_result">No results found. Try a diffrent search</div>
-				</span>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th ng-if="has_distance" ng-click="tableSort('Distance')" >
-								<span class="sort">
-									Distance 
-									<span ng-if="orderByField == 'location.distance'">
-										<span ng-show="reverseSort"><i class="fa fa-sort-numeric-asc"></i></span>
-										<span ng-show="!reverseSort"><i class="fa fa-sort-numeric-desc"></i></span>
-									</span>
-								</span>
-							</th>
-							<th ng-click="tableSort('Name')">
-								<span class="sort">
-									Place 
-									<span ng-if="orderByField == 'name'">
-										<span ng-show="reverseSort"><i class="fa fa-sort-alpha-desc"></i></span>
-										<span ng-show="!reverseSort"><i class="fa fa-sort-alpha-asc"></i></span>
-									</span>
-								</span>
-							</th>
-							<th>Share</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="result in results | orderBy :orderByField:reverseSort">
-							<th scope="row" data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{$index+1}}</th>
-							<td ng-if="has_distance" data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000">{{result.location.distance}} meters</td>
-							<td data-aos="fade-right" data-aos-anchor-placement="center-bottom" data-aos-duration="30000" class="place"><a href="{{result.link}}">{{result.name}}</a></td>
-							<td data-aos="fade-left" data-aos-anchor-placement="center-bottom" data-aos-duration="30000" class="social">
-								<a target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u={{result.link}}"><i class="fa fa-facebook"></i></a>
-								<a target="_blank" ng-href="https://twitter.com/home?status={{result.link}}"><i class="fa fa-twitter"></i></a>
-								<a target="_blank" ng-href="https://plus.google.com/share?url={{result.link}}"><i class="fa fa-google-plus"></i></a>
-								<span class="side-tooltip" ng-click="copyLnk(result.link,$event)"><i class="fa fa-link"></i></span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<show-results></show-results>
+				<results-table></results-table>
 			</div>
 		</div>
 	</div>
 	<div id="snackbar">{{notification_msg}}</div>
-
+	<modal></modal>
+	<loading></loading>
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/foursquare_simple.js"></script>
-
 </body>
 </html>

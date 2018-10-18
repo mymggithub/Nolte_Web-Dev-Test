@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Example</title>
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+	<link rel="stylesheet" href="assets/css/Video-Parallax-Background-v2.css">
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<link rel="stylesheet" href="assets/css/foursquare_simple.css">
+	<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body ng-app="myapp" ng-controller="myCtrl">
+	<div class="parallax">
+		<alert-box></alert-box>
+		<div class="container d-flex justify-content-center align-items-center parallax-content" style="height:100vh;">
+			<div class="col-12 col-md-10 col-lg-8 d-flex justify-content-center flex-column">
+				<h1>Welcome</h1>
+				<p>What are you looking for?</p>
+				<div class="container search-bar">
+					<div class="search-form">
+						<input type="text" name="search" placeholder="Search venue..." ng-model="venueSearch" id="venueSearch" my-enter="findLocation()">
+						<input type="text" name="search" placeholder="Search Near...Can leave blank" ng-model="nearlocation" id="searchNear" my-enter="findLocation()">
+						<button class="btn btn-info" ng-click="findLocation()">Search</button>
+					</div>
+				</div>
+			</div>
+		</div><video autoplay="" muted="" loop="" class="parallax-background"><source src="assets/img/City.mp4" type="video/mp4" wp-acf="[{'type':'url','name':'video','label':'Video','wrapper':{'width':25}},{'type':'text','name':'video_css','label':'Video CSS (eg. filters)','wrapper':{'width':25}}]" wp-attr="[{'target':'src','replace':'%1'},{'target':'parent_style','replace':'%2'}]"></video>
+		<div class="parallax-placeholder" style="background-image:url(&quot;assets/img/placeholder.jpg&quot;);"></div>
+	<main class="page" ng-hide="no_result">
+		<section class="clean-block">
+			<div class="container pg-block">
+				<div class="block-heading">
+					<h2 class="text-info">Places</h2>
+				</div>
+				<results-boxes></results-boxes>
+			</div>
+		</section>
+	</main>
+	</div>
+	<div id="snackbar">{{notification_msg}}</div>
+	<modal></modal>
+	<loading></loading>
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/Video-Parallax-Background-v2.js"></script>
+	<script src="assets/js/foursquare_simple.js"></script>
+</body>
+</html>
