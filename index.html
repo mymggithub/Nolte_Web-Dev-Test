@@ -20,7 +20,12 @@
 				<button class="btn btn-info" ng-click="findLocation()">Search</button>
 			</div>
 			<div class="col-sm-12 col-xs-12 col-md-12">
-				<caption>Search for <i>( {{search_val}} ) </i> <b>{{results.length}}</b> Search results</caption>
+				<span ng-show="searched">
+					<span ng-hide="no_result">
+						<caption>Search for <i>( {{search_val}} ) </i> <b>{{results.length}}</b> Search results</caption>
+					</span>
+					<div ng-show="no_result">No results found. Try a diffrent search</div>
+				</span>
 				<table class="table">
 					<thead>
 						<tr>

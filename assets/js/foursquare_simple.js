@@ -19,7 +19,8 @@ myapp.directive("alertBox", function() {
 
 myapp.controller("myCtrl", function($scope, $http) {
 	$scope.alert_msg = "There has been an error.";
-	$scope.alert_open = false;
+	$scope.no_result = true;
+	$scope.searched = false;
 	$scope.msg = function(msg) {
 		$scope.notification_msg = msg;
 		$("#snackbar").addClass("show");
@@ -84,12 +85,13 @@ myapp.controller("myCtrl", function($scope, $http) {
 					}
 				}
 				$scope.results = r.data.response.venues;
+				$scope.no_result = false;
 				// the timeout is for to reset the AOS animation, because it is not detecting the new length of the page
 				setTimeout(function() {AOS.init({ disable: 'mobile' });}, 1000);
 			},
 			function(r) {
 				// foursquare is not advaced as google in deciphering near, so this is needed for errors
-				alert("Something went wrong, Please try a diffrent search or try another time.");
+				// alert("Something went wrong, Please try a diffrent search or try another time.");
 			}
 		);
 	}
@@ -101,6 +103,8 @@ myapp.controller("myCtrl", function($scope, $http) {
 		$scope.reverseSort = false;
 		$scope.search_val = $scope.venueSearch;
 		$scope.has_distance = false;
+		$scope.no_result = true;
+		$scope.searched = true;
 
 		if ($scope.nearlocation==undefined || $scope.nearlocation == null) {$scope.nearlocation = "";}
 		if ($scope.venueSearch==undefined || $scope.venueSearch == null) {$scope.venueSearch = "";}
