@@ -1,3 +1,7 @@
+/*===========================================
+=            Dynaminc Search Bar            =
+===========================================*/
+
 /*touches to make the search bar more dynamic*/
 .search-form {
 	display:flex;
@@ -25,6 +29,12 @@
 	box-shadow:none;
 	color:#919693;
 }
+
+/*=====  End of Dynaminc Search Bar  ======*/
+
+/*====================================
+=            Social Icons            =
+====================================*/
 
 /* Style all font awesome icons */
 .social .fa {
@@ -71,6 +81,12 @@
 	border: dotted 1px black;
 }
 
+/*=====  End of Social Icons  ======*/
+
+
+/*=====================================
+=            Results Table            =
+=====================================*/
 /* Styles the columns of the table */
 tr:nth-child(even) {
 	background-color: #f2f2f2
@@ -89,7 +105,12 @@ th i{
     color: #212529;
 }
 
+/*=====  End of Results Table  ======*/
 
+
+/*================================
+=            Snackbar            =
+================================*/
 
 /* The snackbar - position it at the bottom and in the middle of the screen */
 
@@ -136,3 +157,36 @@ However, delay the fade out process for 2.5 seconds */
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
+
+/*=====  End of Snackbar  ======*/
+
+
+/*=================================
+=            Alert Box            =
+=================================*/
+
+.alert {
+	display:none;
+	margin: 5px;
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+/*=====  End of Alert Box  ======*/
+

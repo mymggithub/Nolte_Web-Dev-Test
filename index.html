@@ -12,6 +12,7 @@
 </head>
 <body ng-app="myapp" ng-controller="myCtrl">
 	<div class="container">
+		<alert-box></alert-box>
 		<div class="row">
 			<div class="col-sm-12 col-xs-12 col-md-12 search-form">
 				<input type="text" name="search" placeholder="Search venue..." ng-model="venueSearch" id="venueSearch">
@@ -54,9 +55,7 @@
 								<a target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u={{result.link}}"><i class="fa fa-facebook"></i></a>
 								<a target="_blank" ng-href="https://twitter.com/home?status={{result.link}}"><i class="fa fa-twitter"></i></a>
 								<a target="_blank" ng-href="https://plus.google.com/share?url={{result.link}}"><i class="fa fa-google-plus"></i></a>
-								<!-- <a target="_blank" ng-click="copyLnk(result.link)"><i class="fa fa-link"></i></a> -->
 								<span class="side-tooltip" ng-click="copyLnk(result.link,$event)"><i class="fa fa-link"></i></span>
-
 							</td>
 						</tr>
 					</tbody>
@@ -64,7 +63,8 @@
 			</div>
 		</div>
 	</div>
-	<div id="snackbar">{{alert_msg}}</div>
+	<div id="snackbar">{{notification_msg}}</div>
+
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/foursquare_simple.js"></script>

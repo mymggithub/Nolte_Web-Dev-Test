@@ -1,34 +1,42 @@
-function showError(error) {
-	switch(error.code) {
-		case error.PERMISSION_DENIED:
-			alert("User denied the request for Geolocation.");
-			break;
-		case error.POSITION_UNAVAILABLE:
-			alert("Location information is unavailable.");
-			break;
-		case error.TIMEOUT:
-			alert("The request to get user location timed out.");
-			break;
-		case error.UNKNOWN_ERROR:
-			alert("An unknown error occurred.");
-			break;
-	}
-}
 var myapp = angular.module('myapp', []);
+
+
 myapp.directive("showResults", function() {
 	return {
 		template : "<caption>Search for <i>( {{search_val}} ) </i> <b>{{results.length}}</b> Search results</caption>"
 	};
 });
+
+myapp.directive("alertBox", function() {
+	return {
+		template :
+`<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  {{alert_msg}}
+</div>`
+	};
+});
+
 myapp.controller("myCtrl", function($scope, $http) {
+	$scope.alert_msg = "There has been an error.";
+	$scope.alert_open = false;
 	$scope.msg = function(msg) {
-		$scope.alert_msg = msg;
+		$scope.notification_msg = msg;
 		$("#snackbar").addClass("show");
 		setTimeout(function(){ $("#snackbar").removeClass("show"); }, 3000);
 	}
+	$scope.alertBox = function(msg) {
+		if ($scope.alert_msg != msg){
+			$scope.alert_msg = msg;
+			$scope.$apply(); // used to force the updates
+			$(".alert").hide().slideDown( "slow" );
+		}
+	}
+	// this is a function to copy to the clipboard
 	$scope.copyLnk = function(lnk,e) {
 		targetId = "_hiddenCopyText_";
 		target = document.getElementById(targetId);
+		// creates a textarea element and hides it from site 
 		if (!target) {
 			var target = document.createElement("textarea");
 			target.style.position = "absolute";
@@ -37,8 +45,10 @@ myapp.controller("myCtrl", function($scope, $http) {
 			target.id = targetId;
 			document.body.appendChild(target);
 		}
+		// sends the string to be copied
 		target.textContent = lnk;
 		target.select();
+		// does a test if its avalable to the browser 
 		try {
 			succeed = document.execCommand("copy");
 			target.textContent = "";
@@ -58,7 +68,7 @@ myapp.controller("myCtrl", function($scope, $http) {
 	};
 
 	// this is to get search results, it is being called at the time after html5 geo api
-	$scope.getSearch = function(lat, lng) {
+	$scope.getSearch = function(lat="", lng="") {
 		var appendLocation = "";
 		if ($scope.nearlocation == "") {
 			appendLocation = "&ll="+lat+","+lng;
@@ -95,11 +105,30 @@ myapp.controller("myCtrl", function($scope, $http) {
 		if ($scope.nearlocation==undefined || $scope.nearlocation == null) {$scope.nearlocation = "";}
 		if ($scope.venueSearch==undefined || $scope.venueSearch == null) {$scope.venueSearch = "";}
 		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(function(position) {
+			a= navigator.geolocation.getCurrentPosition(function(position) {
 				$scope.getSearch(position.coords.latitude, position.coords.longitude);
-			}, showError);
+			}, 
+			// check for errors for the geo location
+			function(error) {
+				switch(error.code) {
+					case error.PERMISSION_DENIED:
+						$scope.alertBox("Geolocation has been denied, please enable to make use of the app.");
+						break;
+					case error.POSITION_UNAVAILABLE:
+						$scope.alertBox("Location information is unavailable.");
+						break;
+					case error.TIMEOUT:
+						$scope.alertBox("The request to get user location timed out.");
+						break;
+					case error.UNKNOWN_ERROR:
+						$scope.alertBox("An unknown error occurred.");
+						break;
+				}
+				$scope.getSearch();
+			});
+			console.log(a)
 		} else {
-			alert("Geolocation is not supported by this browser.");
+			$scope.alertBox("Geolocation is not supported by this browser.");
 		}
 	}
 });
