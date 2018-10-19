@@ -26,7 +26,7 @@ Required-
 <link rel="stylesheet" href="assets/css/foursquare_simple.css">
 <link rel="stylesheet" href="assets/css/styles.css">
 ```
-After for the angularjs to kick in you will need to add this to the body
+After, for the angularjs to kick in, you will need to add this to the body
 ```
 <body ng-app="myapp" ng-controller="myCtrl">
 ```
