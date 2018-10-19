@@ -10,7 +10,7 @@ myapp.directive("modal", function() {
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">{{details.name}}</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+					<h4 class="modal-title">{{details.name}} | <a href="{{details.canonicalUrl}}" target="_blank"><i class="fa fa-external-link"></i></a></h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
 				<div class="modal-body">
 					<img ng-if="details.bestPhoto.prefix" src="{{details.bestPhoto.prefix}}300x500{{details.bestPhoto.suffix}}">
 					<div ng-if="!details.bestPhoto.prefix">Sorry, no info found. <a ng-href="{{details.canonicalUrl}}" target="_blank">{{details.canonicalUrl}}</a></div>

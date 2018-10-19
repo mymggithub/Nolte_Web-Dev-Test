@@ -226,7 +226,7 @@ However, delay the fade out process for 2.5 seconds */
 		min-height: 225px;
 }
 
-h4.card-title a {
+h4.card-title a, h4.modal-title a{
 		color: black;
 }
 /*=====  End of Results Boxes Fixes  ======*/
