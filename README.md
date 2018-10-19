@@ -112,6 +112,9 @@ ng-click="tableSort('Name')"
 These are the only two options at the moment, the api is really empty.
 
 
+
+
+
 Ok, now we are most done, these will be in the bottom portion of the page.
 
 Snackbar is not an element, but just a way I toast small messages. 
@@ -140,4 +143,5 @@ Then we have the scripts that carry the weight, for this we need aos, jquery, bo
 <script src="assets/js/foursquare_simple.js"></script>
 ```
 
-
+Yay, congrats you made it.
+This will make more sence looking at the index and example. 
