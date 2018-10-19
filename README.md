@@ -50,24 +50,24 @@ I did not create the search bar to be an element you can call, for a reason.
 		<button class="btn btn-info search-btn" ng-click="findLocation()">Search</button>
 	</div>
 </div>
-```html
+```
 There are many ways to make a search bar and I  didnt want you to be limited to mine.
 What is important is the search venue and location inputs need these.
-```
+```html
 ng-model="venueSearch" my-enter="findLocation()"
 ```
-```
+```html
 ng-model="nearlocation" my-enter="findLocation()"
 ```
 And the search button needs 
-```
+```html
  ng-click="findLocation()"
 ```
 to active it as well.
 
 ----note----
 my-enter in the input element
-```
+```html
 my-enter="findLocation()"
 ```
 is for when you click enter on the keyboard to start the search.
@@ -76,7 +76,7 @@ is for when you click enter on the keyboard to start the search.
 
 
 Next we have show results
-```
+```html
 <show-results></show-results>
 ```
 It just shows that status of the results, I would say its optional.
@@ -85,28 +85,28 @@ After to get the results you have two ways to view the data.
 as a table or as boxes.
 
 table-
-```
+```html
 <results-table></results-table>
 ```
 
 boxes-
-```
+```html
 <results-boxes></results-boxes>
 ```
 It is recommended to put these into some kind of container, just to make sure you make sure to keep it dynamic
 Also it helps to be able to manage the results, like using
-```
+```html
 ng-hide="no_result"
 ```
 to hide the results of your decorated text with it.
 
 
 results-table has the abilty to sort data, so does results-boxes, but in order to activate is you will have to create the element with the attribute.
-```
+```html
 ng-click="tableSort('Distance')"
 ```
 or 
-```
+```html
 ng-click="tableSort('Name')"
 ```
 These are the only two options at the moment, the api is really empty.
@@ -118,25 +118,25 @@ These are the only two options at the moment, the api is really empty.
 Ok, now we are most done, these will be in the bottom portion of the page.
 
 Snackbar is not an element, but just a way I toast small messages. 
-```
+```html
 <div id="snackbar">{{notification_msg}}</div>
 ```
 You can can say this is kind of oprional, as can get the notification_msg to use it for other stuff.
 
 Then we are using modals, bootstraps to be precise and shoved it in 
-```
+```html
 <modal></modal>
 ```
 There is not enough data to be putting a lot on it, its just for show.
 
 
 We have a loading element that is needed to show that the program is searching.
-```
+```html
 <loading></loading>
 ```
 
 Then we have the scripts that carry the weight, for this we need aos, jquery, bootstrap, and ours.
-```
+```html
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
