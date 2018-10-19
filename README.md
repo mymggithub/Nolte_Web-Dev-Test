@@ -18,7 +18,7 @@ Lets get started
 I am using bootstrap, font-awesome, aos, angularjs and my code so you will need these in the header.```<head>```
 
 Required-
-```
+```html
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -27,7 +27,7 @@ Required-
 <link rel="stylesheet" href="assets/css/styles.css">
 ```
 After, for the angularjs to kick in, you will need to add this to the body
-```
+```html
 <body ng-app="myapp" ng-controller="myCtrl">
 ```
 
@@ -35,14 +35,14 @@ I have a few custome elements using directives.
 
 alert-box is you guessed it for displaying the alerts
 I recomend puting it where it can expand 100% on the top.
-```
+```html
 <alert-box></alert-box>
 ```
 
 
 
 I did not create the search bar to be an element you can call, for a reason.
-```
+```html
 <div class="container search-bar">
 	<div class="search-form">
 		<input type="text" name="search" placeholder="Venue...Cafe" ng-model="venueSearch" id="venueSearch" my-enter="findLocation()">
@@ -50,7 +50,7 @@ I did not create the search bar to be an element you can call, for a reason.
 		<button class="btn btn-info search-btn" ng-click="findLocation()">Search</button>
 	</div>
 </div>
-```
+```html
 There are many ways to make a search bar and I  didnt want you to be limited to mine.
 What is important is the search venue and location inputs need these.
 ```
