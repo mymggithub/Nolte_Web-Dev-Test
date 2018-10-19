@@ -10,7 +10,11 @@ myapp.directive("modal", function() {
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">{{details.name}} | <a href="{{details.canonicalUrl}}" target="_blank"><i class="fa fa-external-link"></i></a></h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+					<h4 class="modal-title">
+						{{details.name}} | <a href="{{details.canonicalUrl}}" target="_blank"><i class="fa fa-external-link"></i></a>
+					</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				</div>
 				<div class="modal-body">
 					<img ng-if="details.bestPhoto.prefix" src="{{details.bestPhoto.prefix}}300x500{{details.bestPhoto.suffix}}">
 					<div ng-if="!details.bestPhoto.prefix">Sorry, no info found. <a ng-href="{{details.canonicalUrl}}" target="_blank">{{details.canonicalUrl}}</a></div>
@@ -79,7 +83,7 @@ myapp.directive("resultsBoxes", function() {
 	<div class="col-sm-6 col-lg-4" ng-repeat="result in results | orderBy :orderByField:reverseSort">
 		<div class="card clean-card text-center" data-aos="zoom-in-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
 			<div class="card-body info">
-				<h4 class="card-title"><a href="#" data-toggle="modal" data-target="#modal1" ng-click="getDetails(result.id)">{{result.name}}</a> | <a href="{{result.link}}" target="_blank"><i class="fa fa-external-link"></i></a></h4>
+				<h4 class="card-title"><a href="" data-toggle="modal" data-target="#modal1" ng-click="getDetails(result.id)">{{result.name}}</a> | <a href="{{result.link}}" target="_blank"><i class="fa fa-external-link"></i></a></h4>
 				<p class="card-text" ng-if="result.categories[0].name">{{result.categories[0].name}}</p>
 				<p class="card-text" ng-if="!result.categories[0].name">Uncategorized</p>
 				<p class="card-text"  ng-if="has_distance">{{result.location.distance}} meters <a target="_blank" href="http://maps.google.com/maps?q={{result.location.lat}},{{result.location.lng}}"><i class="fa fa-map"></i></a></p>
@@ -152,7 +156,6 @@ myapp.controller("myCtrl", function($scope, $http) {
 	$scope.getDetails = function(id="") {
 		$http.get("https://api.foursquare.com/v2/venues/"+id+"?client_id=UCOSSBXHSTZ3UIAA4RKO5DPXCVJQEOG1NINJ1LDUNL0LEJ4F&client_secret=Q3CGAJFLKGOELNT3I3YPUAQKEHMI20CN4J2QDZGBHD433QDS&v=20180323").then(
 			function(r) {
-				console.log(r.data.response.venue.bestPhoto);
 				$scope.details = r.data.response.venue;
 			}, function() {})
 
