@@ -82,7 +82,7 @@ myapp.directive("resultsBoxes", function() {
 				<h4 class="card-title"><a href="#" data-toggle="modal" data-target="#modal1" ng-click="getDetails(result.id)">{{result.name}}</a> | <a href="{{result.link}}" target="_blank"><i class="fa fa-external-link"></i></a></h4>
 				<p class="card-text" ng-if="result.categories[0].name">{{result.categories[0].name}}</p>
 				<p class="card-text" ng-if="!result.categories[0].name">Uncategorized</p>
-				<p class="card-text">{{result.location.distance}} meters <a target="_blank" href="http://maps.google.com/maps?q={{result.location.lat}},{{result.location.lng}}"><i class="fa fa-map"></i></a></p>
+				<p class="card-text"  ng-if="has_distance">{{result.location.distance}} meters <a target="_blank" href="http://maps.google.com/maps?q={{result.location.lat}},{{result.location.lng}}"><i class="fa fa-map"></i></a></p>
 				<div class="social">
 					<a target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u={{result.link}}"><i class="fa fa-facebook"></i></a>
 					<a target="_blank" ng-href="https://twitter.com/home?status={{result.link}}"><i class="fa fa-twitter"></i></a>
