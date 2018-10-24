@@ -36,7 +36,7 @@ myapp.directive("resultsTable", function() {
 	<thead>
 		<tr>
 			<th>#</th>
-			<th ng-if="has_distance" ng-click="tableSort('Distance')" >
+			<th ng-if="has_distance" ng-click="tableSort('Distance')">
 				<span class="sort">
 					Distance 
 					<span ng-if="orderByField == 'location.distance'">
